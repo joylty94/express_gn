@@ -6,9 +6,7 @@ import createError from 'http-errors'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import indexRouter from './routes/index'
-
-var usersRouter = require('./routes/users');
+import v1Route from './routes/v1'
 
 var app = express();
 
@@ -22,8 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/v1', v1Route)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
